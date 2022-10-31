@@ -1,0 +1,495 @@
+<!doctype html>
+<!--
+* Tabler - Premium and Open Source dashboard template with responsive and high quality UI.
+* @version 1.0.0-beta14
+* @link https://tabler.io
+* Copyright 2018-2022 The Tabler Authors
+* Copyright 2018-2022 codecalm.net Paweł Kuna
+* Licensed under MIT (https://github.com/tabler/tabler/blob/master/LICENSE)
+-->
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Solicitudes de iglesias</title>
+    <!-- CSS files -->
+    <link href="./dist/css/tabler.min.css?1666304673" rel="stylesheet" />
+    <link href="./dist/css/tabler-flags.min.css?1666304673" rel="stylesheet" />
+    <link href="./dist/css/tabler-payments.min.css?1666304673" rel="stylesheet" />
+    <link href="./dist/css/tabler-vendors.min.css?1666304673" rel="stylesheet" />
+    <link href="./dist/css/demo.min.css?1666304673" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <style>
+        @import url('https://rsms.me/inter/inter.css');
+
+        :root {
+            --tblr-font-sans-serif: Inter, -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="./dist/js/demo-theme.min.js?1666304673"></script>
+    <div class="page">
+        <!-- =================================================================================== -->
+        <!-- CABECERA -->
+        <!-- =================================================================================== -->
+        <header class="navbar navbar-expand-md navbar-light d-print-none">
+            <div class="container-xl">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+                    <a href=".">
+                        <img src="./static/logo.png" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+                    </a>
+                </h1>
+                <div class="navbar-nav flex-row order-md-last">
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
+                            aria-label="Open user menu">
+                            <span class="avatar avatar-sm" style="background-image: url(./static/perfil.jpg)"></span>
+                            <div class="d-none d-xl-block ps-2">
+                                <div>Benjamin Cacasaca</div>
+                                <div class="mt-1 small text-muted">Administrador</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- =================================================================================== -->
+        <!-- MENU PRINCIPAL -->
+        <!-- =================================================================================== -->
+        <div class="navbar-expand-md">
+            <div class="collapse navbar-collapse" id="navbar-menu">
+                <div class="navbar navbar-light">
+                    <div class="container-xl">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="./index.html">
+                                    <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                        <!-- Download SVG icon from http://tabler-icons.io/i/home -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <polyline points="5 12 3 12 12 3 21 12 19 12" />
+                                            <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+                                            <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
+                                    </span>
+                                    <span class="nav-link-title">
+                                        Inicio
+                                    </span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item active">
+                                <a class="nav-link" href="./index.html">
+                                    <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            class="icon icon-tabler icon-tabler-building-bank" width="24" height="24"
+                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <line x1="3" y1="21" x2="21" y2="21"></line>
+                                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                                            <polyline points="5 6 12 3 19 6"></polyline>
+                                            <line x1="4" y1="10" x2="4" y2="21"></line>
+                                            <line x1="20" y1="10" x2="20" y2="21"></line>
+                                            <line x1="8" y1="14" x2="8" y2="17"></line>
+                                            <line x1="12" y1="14" x2="12" y2="17"></line>
+                                            <line x1="16" y1="14" x2="16" y2="17"></line>
+                                        </svg>
+                                    </span>
+                                    <span class="nav-link-title">
+                                        Solicitudes
+                                    </span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="./index.html">
+                                    <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                            class="icon icon-tabler icon-tabler-school" width="24" height="24"
+                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <path d="M22 9l-10 -4l-10 4l10 4l10 -4v6"></path>
+                                            <path d="M6 10.6v5.4a6 3 0 0 0 12 0v-5.4"></path>
+                                        </svg>
+                                    </span>
+                                    <span class="nav-link-title">
+                                        Docentes
+                                    </span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="./index.html">
+                                    <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <polyline points="12 3 20 7.5 20 16.5 12 21 4 16.5 4 7.5 12 3" />
+                                            <line x1="12" y1="12" x2="20" y2="7.5" />
+                                            <line x1="12" y1="12" x2="12" y2="21" />
+                                            <line x1="12" y1="12" x2="4" y2="7.5" />
+                                            <line x1="16" y1="5.25" x2="8" y2="9.75" /></svg>
+                                    </span>
+                                    <span class="nav-link-title">
+                                        Materiales
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-wrapper">
+            <!-- =================================================================================== -->
+            <!-- Page header -->
+            <!-- =================================================================================== -->
+            <div class="page-header d-print-none">
+                <div class="container-xl">
+                    <div class="row g-2 align-items-center">
+                        <div class="col">
+                            <div class="page-pretitle">
+                                SAMARITAN'S PURSE
+                            </div>
+                            <h2 class="page-title">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                    class="icon icon-tabler icon-tabler-building-bank" width="24" height="24"
+                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <line x1="3" y1="21" x2="21" y2="21"></line>
+                                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                                    <polyline points="5 6 12 3 19 6"></polyline>
+                                    <line x1="4" y1="10" x2="4" y2="21"></line>
+                                    <line x1="20" y1="10" x2="20" y2="21"></line>
+                                    <line x1="8" y1="14" x2="8" y2="17"></line>
+                                    <line x1="12" y1="14" x2="12" y2="17"></line>
+                                    <line x1="16" y1="14" x2="16" y2="17"></line>
+                                </svg>
+                                Solicitudes de Iglesias
+                            </h2>
+                        </div>
+
+                        <div class="col-auto ms-auto d-print-none">
+                            <div class="btn-list">
+                                <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modalCreateSolicitudes">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <line x1="12" y1="5" x2="12" y2="19" />
+                                        <line x1="5" y1="12" x2="19" y2="12" /></svg>
+                                    Solicitud
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- =================================================================================== -->
+            <!-- Page body -->
+            <!-- =================================================================================== -->
+            <div class="page-body">
+                <div class="container-xl">
+                    <div class="row row-deck row-cards">
+
+
+
+                        <div class="row mt-3">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="table-responsive">
+                                                <table class="table table-vcenter table-center table-sm table-hover"
+                                                    id="tableIglesias">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="text-center" width="15%">ID</th>
+                                                            <th class="text-center" width="15%">Descripción del ministerio</th>
+                                                            <th class="text-center" width="15%">Región</th>
+                                                            <th class="text-center" width="15%">Solicitante</th>
+                                                            <th class="text-center" width="10%">Fecha de solicitud</th>
+                                                            <th class="text-center" width="5%"></th>
+                                                            <th class="text-center" width="5%"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="tbody">
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="notfound"></div>
+
+
+                        <!-- <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal" id="btn-update">
+                            Actualizar
+                        </a> -->
+
+                        <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal" id="btn-delete">
+                            Eliminar
+                        </a>
+
+                        <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal" id="btn-read" style="display: none">
+                            Leer datos
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+            <footer class="footer footer-transparent d-print-none">
+                <div class="container-xl">
+                    <div class="row text-center align-items-center flex-row-reverse">
+                        <div class="col-12 col-lg-auto mt-3 mt-lg-0">
+                            <ul class="list-inline list-inline-dots mb-0">
+                                <li class="list-inline-item">
+                                    <b>Samaritan's Purse © 2022</b>. Operation Christmas Child
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- MODAL CREATE SOLICITUDES -->
+    <div class="modal modal-blur fade" id="modalCreateSolicitudes" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Nueva solicitud</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="formCreateSolicitud">
+                    <div class="modal-body">
+
+                        <div class="mb-3">
+                            <label for="">ID de usuario</label>
+                            <input type="text" id="userid" class="form-control" autocomplete="off" readonly placeholder="ID" />
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label class="form-label">Descripción del ministerio</label>
+                            <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripción del ministerio">
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label class="form-label">Región</label>
+                                <input type="text" class="form-control" name="region" id="region" placeholder="Region del ministerio">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Nombre solicitante</label>
+                                    <input type="text" class="form-control" name="solicitante" id="solicitante" placeholder="Nombre de solicitante">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Fecha de solicitud</label>
+                                    <input type="date" class="form-control" name="fecha" id="fecha">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                        Cancelar
+                    </a>
+                    <!-- <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
+                        Guardar
+                    </a> -->
+                    <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal" id="btn-create">
+                        Guardar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL EDIT SOLICITUDES -->
+    <div class="modal modal-blur fade" id="modalEditSolicitudes" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Nueva solicitud</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="formCreateSolicitud">
+                    <div class="modal-body">
+
+                        <div class="mb-3">
+                            <label for="">ID de solicitud</label>
+                            <input type="text" id="useridedit" class="form-control" autocomplete="off" readonly placeholder="ID" />
+                        </div>
+
+
+                        <div class="mb-3">
+                            <label class="form-label">Descripción del ministerio</label>
+                            <input type="text" class="form-control" name="descripcionedit" id="descripcionedit" placeholder="Descripción del ministerio">
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="mb-3">
+                                <label class="form-label">Región</label>
+                                <input type="text" class="form-control" name="regionedit" id="regionedit" placeholder="Region del ministerio">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Nombre solicitante</label>
+                                    <input type="text" class="form-control" name="solicitanteedit" id="solicitanteedit" placeholder="Nombre de solicitante">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Fecha de solicitud</label>
+                                    <input type="date" class="form-control" name="fechaedit" id="fechaedit">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+                        Cancelar
+                    </a>
+                    <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal" id="btn-update">
+                        Actualizar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal modal-blur fade" id="modalEliminar" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="modal-status bg-danger"></div>
+                <div class="modal-body text-center py-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon mb-2 text-danger icon-lg" width="24" height="24"
+                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M12 9v2m0 4v.01" />
+                        <path
+                            d="M5 19h14a2 2 0 0 0 1.84 -2.75l-7.1 -12.25a2 2 0 0 0 -3.5 0l-7.1 12.25a2 2 0 0 0 1.75 2.75" />
+                        </svg>
+                    <h3>Esta seguro?</h3>
+                    <div class="text-muted">Esta seguro de eliminar la solicitud.</div>
+                </div>
+                <div class="modal-footer">
+                    <div class="w-100">
+                        <div class="row">
+                            <div class="col"><a href="#" class="btn w-100" data-bs-dismiss="modal">
+                                    Cancelar
+                                </a></div>
+                            <div class="col"><a href="#" class="btn btn-danger w-100" data-bs-dismiss="modal" id="delete-btn">
+                                    Eliminar
+                                </a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Labels -->
+    <div class="w-100 btn btn-success insertmsg">Data Inserted Successfully...!</div>
+    <div class="w-100 btn btn-warning updatemsg">Data Updated..! Refresh Database To See Result</div>
+    <div class="w-100 btn btn-danger deletemsg">Data Deleted..!</div>
+
+
+    <!-- Libs JS -->
+    <!-- Tabler Core -->
+    <script src="./dist/js/tabler.min.js?1666304673" defer></script>
+    <script src="./dist/js/demo.min.js?1666304673" defer></script>
+    <script src="./dist/jquery.min.js"></script>
+
+    <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+    <script src="./solicitudes/main.js" type="module"></script>
+
+    <script>
+        // idQWE
+        $(document).ready(function () {
+            $("#btn-read").click();
+        });
+
+        // var d1 = localStorage.getItem("Descripcion");
+        // console.log(d1);
+        // function submit(){
+        //     var dataEntered = retrievedData();
+        //     var readData = readingDataFromLocalStorage(dataEntered);
+        //     console.log(readData);
+        //     insertTable(readData);
+        // }
+
+        // function retrievedData(){
+        //     var descripcion = document.getElementById("descripcion").value;
+        //     var region = document.getElementById("region").value;
+        //     var solicitante = document.getElementById("solicitante").value;
+        //     var fecha = document.getElementById("fecha").value;
+
+        //     var arr = [descripcion, region, solicitante, fecha];
+        //     return arr;
+        // }
+
+        // function readingDataFromLocalStorage(data){
+        //     var d = localStorage.setItem("Descripcion",data[0]);
+        //     var r = localStorage.setItem("Region",data[1]);
+        //     var s = localStorage.setItem("Solicitante",data[2]);
+        //     var f = localStorage.setItem("Fecha",data[3]);
+
+        //     var d1 = localStorage.getItem("Descripcion",d);
+        //     var r1 = localStorage.getItem("Region",r);
+        //     var s1 = localStorage.getItem("Solicitante",s);
+        //     var f1 = localStorage.getItem("Fecha",f);
+        // }
+
+        // function insertTable(data){
+        //     var table = document.getElementById("descripcion").value;
+        //     var row = table.insertRow();
+        //     var cell1 = row.insertCell(0);
+        //     var cell2 = row.insertCell(1);
+        //     var cell3 = row.insertCell(2);
+        //     var cell4 = row.insertCell(3);
+
+        //     cell1.innerHTML = data[0];
+        //     cell1.innerHTML = data[1];
+        //     cell1.innerHTML = data[2];
+        //     cell1.innerHTML = data[3];
+
+        //     row.insertCell(4).innerHTML = '<button>Editar</button><br><button>Eliminar</button>';
+        // }
+        // tableIglesias
+
+    </script>
+</body>
+
+</html>
