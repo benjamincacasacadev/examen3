@@ -90,9 +90,6 @@ const getDataUser = (dbname, fn) => {
 
 
 const SortObjUser = (sortobj) => {
-  // console.log("SORT");
-  // console.log(sortobj);
-  // console.log("==========");
   let obj = {};
   obj = {
     id: sortobj.id,
@@ -103,6 +100,38 @@ const SortObjUser = (sortobj) => {
   return obj;
 }
 
+// getData from the database
+const getDataMaterial = (dbname, fn) => {
+  let index = 0;
+  let obj = {};
+  dbname.count(count => {
+    // count rows in the table using count method
+    if (count) {
+      dbname.each(table => {
+        // table => return the table object data
+        // to arrange order we are going to create for in loop
+        obj = SortObjMaterial(table);
+        fn(obj, index++); // call function with data argument
+      });
+    } else {
+      fn(0);
+    }
+  });
+};
+
+
+const SortObjMaterial = (sortobj) => {
+  let obj = {};
+  obj = {
+    id: sortobj.id,
+    material: sortobj.material,
+    cantidad: sortobj.cantidad,
+    tipo: sortobj.tipo,
+  };
+  return obj;
+}
+
+
 export default solicitudesdb;
 export {
   bulkcreate,
@@ -111,4 +140,6 @@ export {
   SortObj,
   getDataUser,
   SortObjUser,
+  getDataMaterial,
+  SortObjMaterial,
 };
