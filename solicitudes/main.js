@@ -4,12 +4,12 @@ import solicdb, {
   getData,
   SortObj,
   getDataUser,
-  SortObjUser,
+  getDataMaterial,
 } from "./module.js";
 
 
 let db = solicdb("SolicitudDB", {
-  solicitudes: `++id, descripcion, region, solicitante, fecha`,
+  solicitudes: `++id, descripcion, region, solicitante, fecha, material, cantidad, estado`,
   usuarios: `++id, nombre, carnet, celular`,
   materiales: `++id, material, cantidad, tipo`
 });
@@ -43,10 +43,13 @@ btncreate.onclick = event => {
     descripcion: descripcion.value,
     region: region.value,
     solicitante: solicitante.value,
-    fecha: fecha.value
+    fecha: fecha.value,
+    material: material.value,
+    cantidad: cantidad.value,
+    estado: '0',
   });
   // reset textbox values
-  descripcion.value = region.value = solicitante.value = fecha.value = "";
+  descripcion.value = region.value = solicitante.value = fecha.value = material.value = cantidad.value = "";
 
   // set id textbox value
   getData(db.solicitudes, data => {
@@ -72,14 +75,14 @@ btnupdate.onclick = () => {
   const id = parseInt(useridedit.value || 0);
 
   if (id) {
-    console.log(id);
-    console.log(regionedit.value);
     // call dexie update method
     db.solicitudes.update(id, {
       descripcion: descripcionedit.value,
       region: regionedit.value,
       solicitante: solicitanteedit.value,
-      fecha: fechaedit.value
+      fecha: fechaedit.value,
+      material: materialedit.value,
+      cantidad: cantidadedit.value,
     }).then((updated) => {
       // let get = updated ? `data updated` : `couldn't update data`;
 
@@ -99,7 +102,7 @@ btnupdate.onclick = () => {
 btndelete.onclick = () => {
   db.delete();
   db = solicdb("SolicitudDB", {
-    products: `++id, name, seller, price`
+    solicitudes: `++id, descripcion, region, solicitante, fecha, material, cantidad, estado`,
   });
   db.open();
   table();
@@ -130,19 +133,30 @@ function table() {
 
 
   //Create array of options to be added
-  // var array = ["Volvo","Saab","Mercades","Audi"];
   var selectList = document.getElementById("solicitante");
   selectList.className = "form-select";
 
-  var selectListEdit = document.getElementById("solicitanteedit");
-  selectListEdit.className = "form-select";
+  // var selectListEdit = document.getElementById("solicitanteedit");
+  // selectListEdit.className = "form-select";
 
   getDataUser(db.usuarios, data => {
     var option = document.createElement("option");
     option.value = data.nombre;
     option.text = data.nombre;
     selectList.appendChild(option);
-    selectListEdit.appendChild(option);
+    // selectListEdit.appendChild(option);
+  });
+
+    //Create array of options to be added
+  var selectMaterial = document.getElementById("material");
+  selectMaterial.className = "form-select";
+
+  getDataMaterial(db.materiales, data => {
+    var option = document.createElement("option");
+    option.value = data.id;
+    option.text = data.material;
+    selectMaterial.appendChild(option);
+    // selectListEdit.appendChild(option);
   });
 
   getData(db.solicitudes, (data, index) => {
@@ -150,7 +164,23 @@ function table() {
       createEle("tr", tbody, tr => {
         for (const value in data) {
           createEle("td", tr, td => {
-            td.textContent = data[value];
+            if(data.estado == data[value]){
+              if(data[value] == '1'){
+                td.textContent = 'Validado';
+                td.className = 'text-success bold';
+              }else{
+                td.textContent = 'Pendiente';
+                td.className = 'text-orange bold cursor-pointer';
+                td.title = "Clic para validar";
+                td.setAttribute(`data-pk`, data.id);
+                td.setAttribute(`data-id`, data.material);
+                td.setAttribute(`data-cant`, data.cantidad);
+                td.onclick = validatebtn;
+              }
+            }else{
+              td.textContent = data[value];
+            }
+
           });
         }
         createEle("td", tr, td => {
@@ -177,7 +207,72 @@ function table() {
   });
 }
 
+const validatebtn = (event) => {
+
+  let id = parseInt(event.target.dataset.id);
+
+  let cantRestar = parseInt(event.target.dataset.cant);
+
+  var cantAntes = 0;
+  db.materiales.get(id, function (data) {
+    let newdata = SortObj(data);
+    cantAntes = newdata.cantidad || 20;
+
+    if (id) {
+      db.materiales.update(id, {
+        cantidad: parseInt(cantAntes) - parseInt(cantRestar),
+      }).then((updated) => {
+        let pk = parseInt(event.target.dataset.pk);
+        if(pk){
+          db.solicitudes.update(pk, {
+            estado: "1",
+          }).then((u) => {
+            alert("Actualizado con exito");
+            table();
+          })
+        }
+
+      })
+    } else {
+      console.log(`Please Select id: ${id}`);
+    }
+  });
+  console.log(cantAntes);
+  // if (id) {
+  //   db.materiales.update(id, {
+  //     cantidad: parseInt(cantAntes) - parseInt(cantRestar),
+  //   }).then((updated) => {
+  //     alert("Actualizado con exito");
+  //     table();
+  //   })
+  // } else {
+  //   console.log(`Please Select id: ${id}`);
+  // }
+}
+
 const editbtn = (event) => {
+
+  var selectListEdit = document.getElementById("solicitanteedit");
+  selectListEdit.className = "form-select";
+
+  getDataUser(db.usuarios, data => {
+    var option = document.createElement("option");
+    option.value = data.nombre;
+    option.text = data.nombre;
+    selectListEdit.appendChild(option);
+  });
+
+  //Create array of options to be added
+  var selectMaterialEdit = document.getElementById("materialedit");
+  selectMaterialEdit.className = "form-select";
+
+  getDataMaterial(db.materiales, data => {
+    var option = document.createElement("option");
+    option.value = data.id;
+    option.text = data.material;
+    selectMaterialEdit.appendChild(option);
+  });
+
   $('#modalEditSolicitudes').modal('show');
 
   let id = parseInt(event.target.dataset.id);
@@ -188,6 +283,8 @@ const editbtn = (event) => {
     regionedit.value = newdata.region || "";
     solicitanteedit.value = newdata.solicitante || "";
     fechaedit.value = newdata.fecha || "";
+    materialedit.value = newdata.material || "";
+    cantidadedit.value = newdata.cantidad || "";
   });
 }
 

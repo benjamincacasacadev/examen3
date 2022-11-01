@@ -28,6 +28,9 @@
         :root {
             --tblr-font-sans-serif: Inter, -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
         }
+        .bold{
+            font-weight: bold !important;
+        }
     </style>
 </head>
 
@@ -220,13 +223,16 @@
                                                     id="tableIglesias">
                                                     <thead>
                                                         <tr>
-                                                            <th class="text-center" width="15%">ID</th>
+                                                            <th class="text-center" width="5%">ID</th>
                                                             <th class="text-center" width="15%">Descripción del ministerio</th>
                                                             <th class="text-center" width="15%">Región</th>
                                                             <th class="text-center" width="15%">Solicitante</th>
                                                             <th class="text-center" width="10%">Fecha de solicitud</th>
-                                                            <th class="text-center" width="5%"></th>
-                                                            <th class="text-center" width="5%"></th>
+                                                            <th class="text-center" width="10%">Material</th>
+                                                            <th class="text-center" width="10%">Cantidad a retirar</th>
+                                                            <th class="text-center" width="5%">EST.</th>
+                                                            <th class="text-center" width="3%"></th>
+                                                            <th class="text-center" width="3%"></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody id="tbody">
@@ -300,13 +306,28 @@
                             <div class="col-lg-6">
                                 <div class="mb-3">
                                     <label class="form-label">Nombre solicitante</label>
-                                    <select  id="solicitante" class="form-select"></select>
+                                    <select id="solicitante"></select>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="mb-3">
                                     <label class="form-label">Fecha de solicitud</label>
                                     <input type="date" class="form-control" name="fecha" id="fecha">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Material</label>
+                                    <select id="material"></select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Cantidad</label>
+                                    <input type="number" class="form-control" id="cantidad" placeholder="Cantidad">
                                 </div>
                             </div>
                         </div>
@@ -368,6 +389,21 @@
                                 <div class="mb-3">
                                     <label class="form-label">Fecha de solicitud</label>
                                     <input type="date" class="form-control" name="fechaedit" id="fechaedit">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Material</label>
+                                    <select id="materialedit"></select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Cantidad</label>
+                                    <input type="number" class="form-control" id="cantidadedit" placeholder="Cantidad">
                                 </div>
                             </div>
                         </div>

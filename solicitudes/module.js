@@ -65,6 +65,9 @@ const SortObj = (sortobj) => {
     region: sortobj.region,
     solicitante: sortobj.solicitante,
     fecha: sortobj.fecha,
+    material: sortobj.material,
+    cantidad: sortobj.cantidad,
+    estado: sortobj.estado,
   };
   return obj;
 }

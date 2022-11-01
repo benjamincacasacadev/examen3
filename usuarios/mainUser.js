@@ -7,7 +7,7 @@ import solicdb, {
 
 
 let db = solicdb("SolicitudDB", {
-  solicitudes: `++id, descripcion, region, solicitante, fecha`,
+  solicitudes: `++id, descripcion, region, solicitante, fecha, material, cantidad, estado`,
   usuarios: `++id, nombre, carnet, celular`,
   materiales: `++id, material, cantidad, tipo`
 });
