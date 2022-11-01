@@ -4,12 +4,6 @@ const solicitudesdb = (dbname, table) => {
   db.open();
 
   return db;
-  /**
-       * const db = new Dexie('myDb');
-          db.version(1).stores({
-          friends: `name, age`
-      });
-       */
 };
 
 const bulkcreate = (dbtable, data) => {
@@ -63,22 +57,58 @@ const getData = (dbname, fn) => {
 };
 
 const SortObj = (sortobj) => {
+
   let obj = {};
   obj = {
     id: sortobj.id,
     descripcion: sortobj.descripcion,
     region: sortobj.region,
     solicitante: sortobj.solicitante,
-    fecha: sortobj.fecha
+    fecha: sortobj.fecha,
   };
   return obj;
 }
 
+// getData from the database
+const getDataUser = (dbname, fn) => {
+  let index = 0;
+  let obj = {};
+  dbname.count(count => {
+    // count rows in the table using count method
+    if (count) {
+      dbname.each(table => {
+        // table => return the table object data
+        // to arrange order we are going to create for in loop
+        obj = SortObjUser(table);
+        fn(obj, index++); // call function with data argument
+      });
+    } else {
+      fn(0);
+    }
+  });
+};
+
+
+const SortObjUser = (sortobj) => {
+  // console.log("SORT");
+  // console.log(sortobj);
+  // console.log("==========");
+  let obj = {};
+  obj = {
+    id: sortobj.id,
+    nombre: sortobj.nombre,
+    carnet: sortobj.carnet,
+    celular: sortobj.celular,
+  };
+  return obj;
+}
 
 export default solicitudesdb;
 export {
   bulkcreate,
   createEle,
   getData,
-  SortObj
+  SortObj,
+  getDataUser,
+  SortObjUser,
 };
