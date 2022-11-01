@@ -197,7 +197,38 @@
             <div class="page-body">
                 <div class="container-xl">
                     <div class="row row-deck row-cards">
+                        <div class="position-fixed bottom-0 end-0 translate-middle-y p-3" style="z-index: 11">
+                            <div id="toastCreate" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="d-flex">
+                                    <div class="toast-body">
+                                    Registrado con exito
+                                    </div>
+                                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="position-fixed bottom-0 end-0 translate-middle-y p-3" style="z-index: 11">
+                            <div id="toastUpdate" class="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="d-flex">
+                                    <div class="toast-body">
+                                    Actualizado con exito
+                                    </div>
+                                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="position-fixed bottom-0 end-0 translate-middle-y p-3" style="z-index: 11">
+                            <div id="toastDelete" class="toast align-items-center text-white bg-red border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="d-flex">
+                                    <div class="toast-body">
+                                    Eliminado correctamente
+                                    </div>
+                                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                            </div>
+                        </div>
 
 
                         <div class="row mt-3">
@@ -221,13 +252,13 @@
                                                     <tbody id="tbody">
                                                     </tbody>
                                                 </table>
+                                                <div id="notfound" class="mt-2 text-center"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div id="notfound"></div>
 
 
                         <!-- <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal" id="btn-update">

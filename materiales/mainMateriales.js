@@ -48,7 +48,9 @@ btncreate.onclick = event => {
   });
   table();
 
-  alert("Creado con exito");
+  var toastLiveExample = document.getElementById('toastCreate')
+  var toast = new bootstrap.Toast(toastLiveExample)
+  toast.show();
 };
 
 
@@ -70,7 +72,9 @@ btnupdate.onclick = () => {
       // let get = updated ? `data updated` : `couldn't update data`;
 
       // display message
-      alert("Actualizado con exito");
+      var toastLiveExample = document.getElementById('toastUpdate')
+      var toast = new bootstrap.Toast(toastLiveExample)
+      toast.show();
       table();
 
       materialedit.value = cantidadedit.value = tipoedit.value = "";
@@ -169,6 +173,10 @@ const deleteConfirmation = event => {
 }
 
 const deletebtn = event => {
+  var toastLiveExample = document.getElementById('toastDelete')
+  var toast = new bootstrap.Toast(toastLiveExample)
+  toast.show();
+
   let id = parseInt(event.target.dataset.id);
   db.materiales.delete(id);
   table();

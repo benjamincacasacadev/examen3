@@ -79,7 +79,11 @@ btncreate.onclick = event => {
   removeOptions(selectList);
   removeOptions(selectListEdit);
 
-  alert("Creado con exito");
+
+  var toastLiveExample = document.getElementById('toastCreate')
+  var toast = new bootstrap.Toast(toastLiveExample)
+  toast.show();
+
 };
 
 
@@ -104,7 +108,10 @@ btnupdate.onclick = () => {
       // let get = updated ? `data updated` : `couldn't update data`;
 
       // display message
-      alert("Actualizado con exito");
+      var toastLiveExample = document.getElementById('toastUpdate')
+      var toast = new bootstrap.Toast(toastLiveExample)
+      toast.show();
+
       table();
 
       var selectList = document.getElementById("solicitante");
@@ -269,7 +276,10 @@ const validatebtn = (event) => {
           db.solicitudes.update(pk, {
             estado: "V",
           }).then((u) => {
-            alert("Actualizado con exito");
+            var toastLiveExample = document.getElementById('toastUpdate')
+            var toast = new bootstrap.Toast(toastLiveExample)
+            toast.show();
+
             table();
           })
         }
@@ -283,6 +293,22 @@ const validatebtn = (event) => {
 }
 
 const editbtn = (event) => {
+
+  var selectList = document.getElementById("solicitante");
+  var selectListEdit = document.getElementById("solicitanteedit");
+  removeOptions(selectList);
+  removeOptions(selectListEdit);
+
+  var selectList = document.getElementById("material");
+  var selectListEdit = document.getElementById("materialedit");
+  removeOptions(selectList);
+  removeOptions(selectListEdit);
+
+  var selectList = document.getElementById("materialliteral");
+  var selectListEdit = document.getElementById("materialliteraledit");
+  removeOptions(selectList);
+  removeOptions(selectListEdit);
+
 
   var selectListEdit = document.getElementById("solicitanteedit");
   selectListEdit.className = "form-select";
@@ -351,6 +377,11 @@ const deletebtn = event => {
 
   let id = parseInt(event.target.dataset.id);
   db.solicitudes.delete(id);
+
+  var toastLiveExample = document.getElementById('toastDelete')
+  var toast = new bootstrap.Toast(toastLiveExample)
+  toast.show();
+
   table();
 }
 

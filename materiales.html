@@ -185,7 +185,7 @@
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                         <line x1="12" y1="5" x2="12" y2="19" />
                                         <line x1="5" y1="12" x2="19" y2="12" /></svg>
-                                    Usuario
+                                    Material
                                 </a>
                             </div>
                         </div>
@@ -198,8 +198,38 @@
             <div class="page-body">
                 <div class="container-xl">
                     <div class="row row-deck row-cards">
+                        <div class="position-fixed bottom-0 end-0 translate-middle-y p-3" style="z-index: 11">
+                            <div id="toastCreate" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="d-flex">
+                                    <div class="toast-body">
+                                    Registrado con exito
+                                    </div>
+                                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="position-fixed bottom-0 end-0 translate-middle-y p-3" style="z-index: 11">
+                            <div id="toastUpdate" class="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="d-flex">
+                                    <div class="toast-body">
+                                    Actualizado con exito
+                                    </div>
+                                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="position-fixed bottom-0 end-0 translate-middle-y p-3" style="z-index: 11">
+                            <div id="toastDelete" class="toast align-items-center text-white bg-red border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="d-flex">
+                                    <div class="toast-body">
+                                    Eliminado correctamente
+                                    </div>
+                                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="row mt-3">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -207,8 +237,7 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="table-responsive">
-                                                <table class="table table-vcenter table-center table-sm table-hover"
-                                                    id="tableIglesias">
+                                                <table class="table table-vcenter table-center table-sm table-hover" id="tableIglesias">
                                                     <thead>
                                                         <tr>
                                                             <th class="text-center" width="15%">ID</th>
@@ -222,13 +251,14 @@
                                                     <tbody id="tbody">
                                                     </tbody>
                                                 </table>
+                                                <div id="notfound" class="mt-2 text-center"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div id="notfound"></div>
+
 
 
                         <!-- <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal" id="btn-update">
@@ -288,7 +318,7 @@
                             <div class="col-lg-6">
                                 <div class="mb-3">
                                     <label class="form-label">Cantidad</label>
-                                    <input type="text" class="form-control" id="cantidad" placeholder="Cantidad">
+                                    <input type="number" class="form-control" id="cantidad" placeholder="Cantidad">
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -341,7 +371,7 @@
                             <div class="col-lg-6">
                                 <div class="mb-3">
                                     <label class="form-label">Cantidad</label>
-                                    <input type="text" class="form-control" id="cantidadedit" placeholder="Cantidad">
+                                    <input type="number" class="form-control" id="cantidadedit" placeholder="Cantidad">
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -357,9 +387,6 @@
                     <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
                         Cancelar
                     </a>
-                    <!-- <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal">
-                        Guardar
-                    </a> -->
                     <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal" id="btn-update">
                         Guardar
                     </a>

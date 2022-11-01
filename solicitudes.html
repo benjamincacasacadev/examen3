@@ -128,7 +128,7 @@
                             </li>
 
                             <li class="nav-item active">
-                                <a class="nav-link" href="./index.html">
+                                <a class="nav-link" href="./solicitudes.html">
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                                         <svg xmlns="http://www.w3.org/2000/svg"
                                             class="icon icon-tabler icon-tabler-building-bank" width="24" height="24"
@@ -210,8 +210,38 @@
             <div class="page-body">
                 <div class="container-xl">
                     <div class="row row-deck row-cards">
+                        <div class="position-fixed bottom-0 end-0 translate-middle-y p-3" style="z-index: 11">
+                            <div id="toastCreate" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="d-flex">
+                                    <div class="toast-body">
+                                    Registrado con exito
+                                    </div>
+                                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="position-fixed bottom-0 end-0 translate-middle-y p-3" style="z-index: 11">
+                            <div id="toastUpdate" class="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="d-flex">
+                                    <div class="toast-body">
+                                    Actualizado con exito
+                                    </div>
+                                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="position-fixed bottom-0 end-0 translate-middle-y p-3" style="z-index: 11">
+                            <div id="toastDelete" class="toast align-items-center text-white bg-red border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="d-flex">
+                                    <div class="toast-body">
+                                    Eliminado correctamente
+                                    </div>
+                                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="row mt-3">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -238,13 +268,13 @@
                                                     <tbody id="tbody">
                                                     </tbody>
                                                 </table>
+                                                <div id="notfound" class="mt-2 text-center"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div id="notfound"></div>
 
                         <a href="#" class="btn btn-primary ms-auto" data-bs-dismiss="modal" id="btn-read" style="display: none">
                             Leer datos
@@ -496,6 +526,17 @@
             var val = $( "#materialedit option:selected" ).text();
             $("#materialliteraledit").val(val);
         });
+
+        var toastTrigger = document.getElementById('liveToastBtn')
+        var toastLiveExample = document.getElementById('toastDelete')
+        if (toastTrigger) {
+            toastTrigger.addEventListener('click', function () {
+                var toast = new bootstrap.Toast(toastLiveExample)
+
+                toast.show()
+            })
+        }
+
     </script>
 </body>
 
