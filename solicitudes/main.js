@@ -2,7 +2,9 @@ import solicdb, {
   bulkcreate,
   createEle,
   getData,
-  SortObj
+  SortObj,
+  getDataUser,
+  SortObjUser,
 } from "./module.js";
 
 
@@ -50,7 +52,13 @@ btncreate.onclick = event => {
   getData(db.solicitudes, data => {
     userid.value = data.id + 1 || 1;
   });
+
   table();
+
+  var selectList = document.getElementById("solicitante");
+  var selectListEdit = document.getElementById("solicitanteedit");
+  removeOptions(selectList);
+  removeOptions(selectListEdit);
 
   alert("Creado con exito");
 };
@@ -103,8 +111,12 @@ window.onload = event => {
   textID(userid);
 };
 
-
-
+function removeOptions(selectElement) {
+  var i, L = selectElement.options.length - 1;
+  for(i = L; i >= 0; i--) {
+    selectElement.remove(i);
+  }
+}
 
 // create dynamic table
 function table() {
@@ -117,8 +129,23 @@ function table() {
   }
 
 
+  //Create array of options to be added
+  // var array = ["Volvo","Saab","Mercades","Audi"];
+  var selectList = document.getElementById("solicitante");
+  selectList.className = "form-select";
+
+  var selectListEdit = document.getElementById("solicitanteedit");
+  selectListEdit.className = "form-select";
+
+  getDataUser(db.usuarios, data => {
+    var option = document.createElement("option");
+    option.value = data.nombre;
+    option.text = data.nombre;
+    selectList.appendChild(option);
+    selectListEdit.appendChild(option);
+  });
+
   getData(db.solicitudes, (data, index) => {
-    console.log(data);
     if (data) {
       createEle("tr", tbody, tr => {
         for (const value in data) {
