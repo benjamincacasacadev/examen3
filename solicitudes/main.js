@@ -7,7 +7,9 @@ import solicdb, {
 
 
 let db = solicdb("SolicitudDB", {
-  solicitudes: `++id, descripcion, region, solicitante, fecha`
+  solicitudes: `++id, descripcion, region, solicitante, fecha`,
+  usuarios: `++id, nombre, carnet, celular`,
+  materiales: `++id, material, cantidad, tipo`
 });
 
 // input tags
@@ -51,8 +53,6 @@ btncreate.onclick = event => {
   table();
 
   alert("Creado con exito");
-  let insertmsg = document.querySelector(".insertmsg");
-  getMsg(flag, insertmsg);
 };
 
 
@@ -74,13 +74,10 @@ btnupdate.onclick = () => {
       fecha: fechaedit.value
     }).then((updated) => {
       // let get = updated ? `data updated` : `couldn't update data`;
-      let get = updated ? true : false;
 
       // display message
       alert("Actualizado con exito");
-      let updatemsg = document.querySelector(".updatemsg");
       table();
-      getMsg(get, updatemsg);
 
       descripcion.value = region.value = solicitante.value = fecha.value = "";
       //console.log(get);
@@ -99,9 +96,6 @@ btndelete.onclick = () => {
   db.open();
   table();
   textID(userid);
-  // display message
-  let deletemsg = document.querySelector(".deletemsg");
-  getMsg(true, deletemsg);
 }
 
 window.onload = event => {
@@ -192,18 +186,4 @@ function textID(textboxid) {
   getData(db.solicitudes, data => {
     textboxid.value = data.id + 1 || 1;
   });
-}
-
-// function msg
-function getMsg(flag, element) {
-  if (flag) {
-    // call msg
-    element.className += " movedown";
-
-    setTimeout(() => {
-      element.classList.forEach(classname => {
-        classname == "movedown" ? undefined : element.classList.remove('movedown');
-      })
-    }, 4000);
-  }
 }
