@@ -9,7 +9,7 @@ import solicdb, {
 
 
 let db = solicdb("SolicitudDB", {
-  solicitudes: `++id, descripcion, region, solicitante, fecha, material, cantidad, estado`,
+  solicitudes: `++id, descripcion, region, solicitante, fecha, material, materialliteral, cantidad, estado`,
   usuarios: `++id, nombre, carnet, celular`,
   materiales: `++id, material, cantidad, tipo`
 });
@@ -20,13 +20,18 @@ const descripcion = document.getElementById("descripcion");
 const region = document.getElementById("region");
 const solicitante = document.getElementById("solicitante");
 const fecha = document.getElementById("fecha");
+const material = document.getElementById("material");
+const materialliteral = document.getElementById("materialliteral");
+const cantidad = document.getElementById("cantidad");
 
 
 const useridedit = document.getElementById("useridedit");
 const descripcionedit = document.getElementById("descripcionedit");
 const regionedit = document.getElementById("regionedit");
 const solicitanteedit = document.getElementById("solicitanteedit");
-const fechaedit = document.getElementById("fechaedit");
+const materialedit = document.getElementById("materialedit");
+const materialliteraledit = document.getElementById("materialliteraledit");
+const cantidadedit = document.getElementById("cantidadedit");
 
 // create button
 const btncreate = document.getElementById("btn-create");
@@ -45,11 +50,12 @@ btncreate.onclick = event => {
     solicitante: solicitante.value,
     fecha: fecha.value,
     material: material.value,
+    materialliteral: materialliteral.value,
     cantidad: cantidad.value,
-    estado: '0',
+    estado: 'P',
   });
   // reset textbox values
-  descripcion.value = region.value = solicitante.value = fecha.value = material.value = cantidad.value = "";
+  descripcion.value = region.value = solicitante.value = fecha.value = material.value = materialliteral.value = cantidad.value = "";
 
   // set id textbox value
   getData(db.solicitudes, data => {
@@ -60,6 +66,16 @@ btncreate.onclick = event => {
 
   var selectList = document.getElementById("solicitante");
   var selectListEdit = document.getElementById("solicitanteedit");
+  removeOptions(selectList);
+  removeOptions(selectListEdit);
+
+  var selectList = document.getElementById("material");
+  var selectListEdit = document.getElementById("materialedit");
+  removeOptions(selectList);
+  removeOptions(selectListEdit);
+
+  var selectList = document.getElementById("materialliteral");
+  var selectListEdit = document.getElementById("materialliteraledit");
   removeOptions(selectList);
   removeOptions(selectListEdit);
 
@@ -82,6 +98,7 @@ btnupdate.onclick = () => {
       solicitante: solicitanteedit.value,
       fecha: fechaedit.value,
       material: materialedit.value,
+      materialliteral: materialliteraledit.value,
       cantidad: cantidadedit.value,
     }).then((updated) => {
       // let get = updated ? `data updated` : `couldn't update data`;
@@ -90,8 +107,23 @@ btnupdate.onclick = () => {
       alert("Actualizado con exito");
       table();
 
+      var selectList = document.getElementById("solicitante");
+      var selectListEdit = document.getElementById("solicitanteedit");
+      removeOptions(selectList);
+      removeOptions(selectListEdit);
+
+      var selectList = document.getElementById("material");
+      var selectListEdit = document.getElementById("materialedit");
+      removeOptions(selectList);
+      removeOptions(selectListEdit);
+
+      var selectList = document.getElementById("materialliteral");
+      var selectListEdit = document.getElementById("materialliteraledit");
+      removeOptions(selectList);
+      removeOptions(selectListEdit);
+
+
       descripcion.value = region.value = solicitante.value = fecha.value = "";
-      //console.log(get);
     })
   } else {
     console.log(`Please Select id: ${id}`);
@@ -102,7 +134,7 @@ btnupdate.onclick = () => {
 btndelete.onclick = () => {
   db.delete();
   db = solicdb("SolicitudDB", {
-    solicitudes: `++id, descripcion, region, solicitante, fecha, material, cantidad, estado`,
+    solicitudes: `++id, descripcion, region, solicitante, fecha, material, materialliteral, cantidad, estado`,
   });
   db.open();
   table();
@@ -136,19 +168,15 @@ function table() {
   var selectList = document.getElementById("solicitante");
   selectList.className = "form-select";
 
-  // var selectListEdit = document.getElementById("solicitanteedit");
-  // selectListEdit.className = "form-select";
-
   getDataUser(db.usuarios, data => {
     var option = document.createElement("option");
     option.value = data.nombre;
     option.text = data.nombre;
     selectList.appendChild(option);
-    // selectListEdit.appendChild(option);
   });
 
-    //Create array of options to be added
   var selectMaterial = document.getElementById("material");
+  var selectMaterialLiteral = document.getElementById("materialliteral");
   selectMaterial.className = "form-select";
 
   getDataMaterial(db.materiales, data => {
@@ -156,7 +184,11 @@ function table() {
     option.value = data.id;
     option.text = data.material;
     selectMaterial.appendChild(option);
-    // selectListEdit.appendChild(option);
+
+    var optionLit = document.createElement("option");
+    optionLit.value = data.material;
+    optionLit.text = data.material;
+    selectMaterialLiteral.appendChild(optionLit);
   });
 
   getData(db.solicitudes, (data, index) => {
@@ -165,18 +197,26 @@ function table() {
         for (const value in data) {
           createEle("td", tr, td => {
             if(data.estado == data[value]){
-              if(data[value] == '1'){
+              if(data[value] == 'V'){
                 td.textContent = 'Validado';
                 td.className = 'text-success bold';
-              }else{
+              }else if(data[value] == 'P'){
+                var mater = data.material.split("+");
+                var idMat = mater[0] ?? '';
+
                 td.textContent = 'Pendiente';
                 td.className = 'text-orange bold cursor-pointer';
                 td.title = "Clic para validar";
                 td.setAttribute(`data-pk`, data.id);
-                td.setAttribute(`data-id`, data.material);
+                td.setAttribute(`data-id`, idMat);
                 td.setAttribute(`data-cant`, data.cantidad);
                 td.onclick = validatebtn;
               }
+            }else if(data.material == data[value]){
+              var mater = data[value].split("+");
+              var idMat = mater[0] ?? '';
+              var nomMat = mater[1] ?? '';
+              td.textContent = nomMat;
             }else{
               td.textContent = data[value];
             }
@@ -184,24 +224,26 @@ function table() {
           });
         }
         createEle("td", tr, td => {
-          createEle("i", td, i => {
-            i.className += "fas fa-edit btnedit text-primary cursor-pointer";
-            i.setAttribute(`data-id`, data.id);
-            // store number of edit buttons
-            i.onclick = editbtn;
-          });
+          if(data.estado == 'P'){
+            createEle("i", td, i => {
+              i.className += "fas fa-edit btnedit text-primary cursor-pointer";
+              i.setAttribute(`data-id`, data.id);
+              i.onclick = editbtn;
+            });
+          }
         })
         createEle("td", tr, td => {
-          createEle("i", td, i => {
-            i.className += "fas fa-trash-alt btndelete text-red cursor-pointer";
-            i.setAttribute(`data-id`, data.id);
-            // store number of edit buttons
-            i.onclick = deleteConfirmation;
-          });
+          if(data.estado == 'P'){
+            createEle("i", td, i => {
+              i.className += "fas fa-trash-alt btndelete text-red cursor-pointer";
+              i.setAttribute(`data-id`, data.id);
+              i.onclick = deleteConfirmation;
+            });
+          }
         })
       });
     } else {
-      notfound.textContent = "No record found in the database...!";
+      notfound.textContent = "La tabla no tiene datos guardados";
     }
 
   });
@@ -225,7 +267,7 @@ const validatebtn = (event) => {
         let pk = parseInt(event.target.dataset.pk);
         if(pk){
           db.solicitudes.update(pk, {
-            estado: "1",
+            estado: "V",
           }).then((u) => {
             alert("Actualizado con exito");
             table();
@@ -237,17 +279,7 @@ const validatebtn = (event) => {
       console.log(`Please Select id: ${id}`);
     }
   });
-  console.log(cantAntes);
-  // if (id) {
-  //   db.materiales.update(id, {
-  //     cantidad: parseInt(cantAntes) - parseInt(cantRestar),
-  //   }).then((updated) => {
-  //     alert("Actualizado con exito");
-  //     table();
-  //   })
-  // } else {
-  //   console.log(`Please Select id: ${id}`);
-  // }
+
 }
 
 const editbtn = (event) => {
@@ -284,6 +316,7 @@ const editbtn = (event) => {
     solicitanteedit.value = newdata.solicitante || "";
     fechaedit.value = newdata.fecha || "";
     materialedit.value = newdata.material || "";
+    materialliteraledit.value = newdata.materialliteral || "";
     cantidadedit.value = newdata.cantidad || "";
   });
 }
@@ -291,7 +324,6 @@ const editbtn = (event) => {
 // delete icon remove element
 
 const deleteConfirmation = event => {
-  console.log(event.target.dataset.id);
   $('#modalEliminar').modal('show');
 
   const btndeleteModal = document.getElementById("delete-btn");
@@ -300,6 +332,17 @@ const deleteConfirmation = event => {
 }
 
 const deletebtn = event => {
+  var selectList = document.getElementById("solicitante");
+  var selectListEdit = document.getElementById("solicitanteedit");
+  removeOptions(selectList);
+  removeOptions(selectListEdit);
+
+  var selectList = document.getElementById("material");
+  var selectListEdit = document.getElementById("materialedit");
+  removeOptions(selectList);
+  removeOptions(selectListEdit);
+
+
   let id = parseInt(event.target.dataset.id);
   db.solicitudes.delete(id);
   table();

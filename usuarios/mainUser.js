@@ -7,7 +7,7 @@ import solicdb, {
 
 
 let db = solicdb("SolicitudDB", {
-  solicitudes: `++id, descripcion, region, solicitante, fecha, material, cantidad, estado`,
+  solicitudes: `++id, descripcion, region, solicitante, fecha, material, materialliteral, cantidad, estado`,
   usuarios: `++id, nombre, carnet, celular`,
   materiales: `++id, material, cantidad, tipo`
 });
@@ -138,7 +138,7 @@ function table() {
         })
       });
     } else {
-      notfound.textContent = "No record found in the database...!";
+      notfound.textContent = "La tabla no tiene datos guardados";
     }
 
   });

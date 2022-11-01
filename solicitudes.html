@@ -331,6 +331,15 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row" style="display: none;">
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Material Literal</label>
+                                    <select id="materialliteral"></select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </form>
                 <div class="modal-footer">
@@ -407,6 +416,15 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row" style="display: none;">
+                            <div class="col-lg-6">
+                                <div class="mb-3">
+                                    <label class="form-label">Material Literal</label>
+                                    <select id="materialliteraledit"></select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </form>
                 <div class="modal-footer">
@@ -467,6 +485,11 @@
         // idQWE
         $(document).ready(function () {
             $("#btn-read").click();
+        });
+
+        $("#material").change(function() {
+            var val = $( "#material option:selected" ).text();
+            $("#materialliteral").val(val);
         });
     </script>
 </body>
