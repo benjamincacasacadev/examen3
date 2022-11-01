@@ -3,7 +3,7 @@ import solicdb, {
   createEle,
   getDataMaterial,
   SortObjMaterial,
-} from "/solicitudes/module.js";
+} from "../module.js";
 
 
 let db = solicdb("SolicitudDB", {

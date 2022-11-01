@@ -5,7 +5,7 @@ import solicdb, {
   SortObj,
   getDataUser,
   getDataMaterial,
-} from "./module.js";
+} from "../module.js";
 
 
 let db = solicdb("SolicitudDB", {
