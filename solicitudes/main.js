@@ -296,6 +296,7 @@ const editbtn = (event) => {
 
   //Create array of options to be added
   var selectMaterialEdit = document.getElementById("materialedit");
+  var selectMaterialLiteralEdit = document.getElementById("materialliteraledit");
   selectMaterialEdit.className = "form-select";
 
   getDataMaterial(db.materiales, data => {
@@ -303,6 +304,11 @@ const editbtn = (event) => {
     option.value = data.id;
     option.text = data.material;
     selectMaterialEdit.appendChild(option);
+
+    var optionLit = document.createElement("option");
+    optionLit.value = data.material;
+    optionLit.text = data.material;
+    selectMaterialLiteralEdit.appendChild(optionLit);
   });
 
   $('#modalEditSolicitudes').modal('show');
